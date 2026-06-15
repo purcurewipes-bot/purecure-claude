@@ -30,15 +30,18 @@ export function Footer() {
   };
 
   return (
-    <footer className="mt-24 border-t border-border bg-secondary/30">
+    <footer className="mt-24 border-t border-border bg-accent/70">
       <div className="mx-auto max-w-7xl px-6 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
         {/* Brand */}
         <div className="lg:col-span-2">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt={brand.name} className="h-10 w-auto object-contain" />
+            <img src={logo} alt={brand.name} className="h-20 w-auto object-contain" />
           </Link>
           <p className="mt-3 text-sm text-muted-foreground max-w-sm">
-            {brand.tagline} — Premium hygiene wipes designed for real, everyday moments.
+            {brand.tagline}
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground max-w-sm">
+            Premium hygiene wipes designed for real, everyday moments.
           </p>
           <form onSubmit={onSubscribe} className="mt-6 max-w-sm">
             <h4 className="font-display font-semibold mb-2">Subscribe to our newsletter</h4>
@@ -66,26 +69,6 @@ export function Footer() {
               </div>
             )}
           </form>
-          <div className="mt-6 flex gap-3">
-            {[Instagram, Twitter, Facebook, Mail].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="h-9 w-9 grid place-items-center rounded-full bg-background border border-border hover:bg-primary hover:text-primary-foreground transition"
-              >
-                <Icon size={16} />
-              </a>
-            ))}
-            <a
-              href={brand.whatsappLink}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp"
-              className="h-9 w-9 grid place-items-center rounded-full bg-background border border-border hover:bg-[#25D366] hover:text-white transition"
-            >
-              <MessageCircle size={16} />
-            </a>
-          </div>
         </div>
 
         {/* Explore */}

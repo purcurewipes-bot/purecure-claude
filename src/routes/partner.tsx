@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { submitWeb3Form } from "@/lib/web3forms";
 import { toast } from "sonner";
+import partnerGrowthImage from "@/assets/partner-growth-handshake.png";
 import {
   Users,
   ShieldCheck,
@@ -109,7 +110,7 @@ function PartnerPage() {
   return (
     <>
       {/* HERO + FORM */}
-      <section className="bg-secondary/40">
+      <section className="bg-accent/70">
         <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20 grid lg:grid-cols-2 gap-12 items-start">
           {/* Left copy */}
           <div className="pt-4">
@@ -130,6 +131,13 @@ function PartnerPage() {
                 and our team will get in touch with you.
               </p>
             </div>
+            <div className="mt-10 overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+              <img
+                src={partnerGrowthImage}
+                alt="Business partners shaking hands with a growth arrow in the background"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
           </div>
 
           {/* Right form card */}
@@ -138,7 +146,7 @@ function PartnerPage() {
             className="rounded-3xl bg-card border border-border shadow-card p-7 md:p-10"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="h-14 w-14 grid place-items-center rounded-full bg-secondary text-primary">
+              <div className="h-14 w-14 grid place-items-center rounded-full bg-accent text-primary">
                 <Users size={26} />
               </div>
               <h2 className="mt-4 font-display text-2xl md:text-3xl font-bold text-primary">
@@ -273,7 +281,7 @@ function PartnerPage() {
             </button>
 
             <div className="mt-5 flex items-start gap-3 text-sm text-muted-foreground">
-              <div className="h-9 w-9 grid place-items-center rounded-full bg-secondary text-primary shrink-0">
+              <div className="h-9 w-9 grid place-items-center rounded-full bg-accent text-primary shrink-0">
                 <ShieldCheck size={16} />
               </div>
               <p>
@@ -285,7 +293,7 @@ function PartnerPage() {
       </section>
 
       {/* BENEFITS STRIP */}
-      <section className="bg-secondary/60 border-y border-border">
+      <section className="bg-accent/80 border-y border-border">
         <div className="mx-auto max-w-7xl px-6 py-12 grid grid-cols-2 md:grid-cols-5 gap-8">
           {benefits.map(({ icon: Icon, title, subtitle }) => (
             <div key={title} className="flex flex-col items-center text-center">

@@ -35,8 +35,8 @@ export function Header() {
             <Link
               key={item.to}
               to={item.to}
-              className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground rounded-full hover:bg-secondary transition-colors"
-              activeProps={{ className: "text-foreground bg-secondary" }}
+              className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground rounded-full hover:bg-accent transition-colors"
+              activeProps={{ className: "text-primary bg-accent" }}
               activeOptions={{ exact: true }}
             >
               {item.label}
@@ -45,7 +45,7 @@ export function Header() {
         </nav>
 
         <button
-          className="md:hidden p-2 rounded-lg hover:bg-secondary"
+          className="md:hidden p-2 rounded-lg hover:bg-accent"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
         >
@@ -61,7 +61,7 @@ export function Header() {
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="px-4 py-3 rounded-lg hover:bg-secondary font-medium"
+                className="px-4 py-3 rounded-lg hover:bg-accent font-medium"
               >
                 {item.label}
               </Link>

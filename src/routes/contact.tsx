@@ -43,7 +43,6 @@ function ContactPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 lg:py-24">
       <div className="text-center max-w-2xl mx-auto">
-        <span className="text-sm font-medium text-primary">Contact</span>
         <h1 className="mt-3 font-display text-5xl md:text-6xl font-bold leading-[1.05]">
           Let's <span className="text-gradient">talk.</span>
         </h1>

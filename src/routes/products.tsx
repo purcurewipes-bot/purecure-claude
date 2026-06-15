@@ -53,8 +53,8 @@ const variants = [
 const upcoming = [
   { name: "Flushable Wipes", desc: "Septic & sewer safe everyday wipes.", img: sachetImg },
   { name: "Baby Wipes", desc: "Ultra-gentle for delicate baby skin.", img: sachetLying },
-  { name: "Facial Bamboo Tissue", desc: "Soft, sustainable bamboo facial tissue.", img: boxBack },
   { name: "Bath & Body Wipes", desc: "Full-body refresh, anywhere, anytime.", img: displayImg },
+  { name: "Facial Bamboo Tissue", desc: "Soft, sustainable bamboo facial tissue.", img: boxBack },
 ];
 
 const scenarios = [
@@ -80,14 +80,6 @@ function ProductsPage() {
             Premium personal cleansing wipes — built for travel, the gym, the office and every part of daily life.
           </p>
         </div>
-        <div className="relative h-[400px] lg:h-[520px] flex items-center justify-center">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 to-transparent rounded-[3rem] blur-3xl" />
-          <img
-            src={fragranceLifestyle}
-            alt="PURCURE fragrance-free wipes"
-            className="relative max-h-full w-auto object-contain drop-shadow-2xl rounded-3xl"
-          />
-        </div>
       </section>
 
       {/* FLAGSHIP PRODUCTS */}
@@ -102,7 +94,7 @@ function ProductsPage() {
               key={v.name}
               className="group rounded-3xl border border-border bg-card overflow-hidden shadow-card hover:shadow-soft hover:-translate-y-1 transition"
             >
-              <div className="aspect-[4/3] bg-gradient-to-br from-secondary to-background grid place-items-center p-8">
+              <div className="aspect-[4/3] bg-gradient-to-br from-accent to-background grid place-items-center p-8">
                 <img
                   src={v.img}
                   alt={v.name}
@@ -137,7 +129,7 @@ function ProductsPage() {
               <span className="absolute top-3 right-3 z-10 rounded-full bg-foreground/85 text-background text-[10px] font-bold tracking-widest uppercase px-3 py-1">
                 Coming Soon
               </span>
-              <div className="aspect-square bg-gradient-to-br from-secondary to-background grid place-items-center p-6 grayscale opacity-70">
+              <div className="aspect-square bg-gradient-to-br from-accent to-background grid place-items-center p-6 grayscale opacity-70">
                 <img src={u.img} alt={u.name} loading="lazy" className="w-full h-full object-contain" />
               </div>
               <div className="p-5">

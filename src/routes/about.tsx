@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Plane, ShieldCheck, Sparkles } from "lucide-react";
+import carLifestyle from "@/assets/fragrance-free-car1.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -38,8 +39,8 @@ function AboutPage() {
       <section className="mt-16 grid lg:grid-cols-2 gap-10 items-center">
         <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-soft">
           <img
-            src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80"
-            alt="PURCURE everyday care"
+            src={carLifestyle}
+            alt="PURCURE in everyday life"
             className="absolute inset-0 h-full w-full object-cover"
           />
         </div>

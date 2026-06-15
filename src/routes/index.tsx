@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import banner from "@/assets/purcure-banner.png";
-import carLifestyle from "@/assets/fragrance-free-car.png";
+import carLifestyle from "@/assets/fragrance-free-car1.jpg";
 import { useState } from "react";
 import {
   SprayCan,
@@ -72,20 +72,20 @@ const lifestyle = [
 
 const faqs = [
   {
-    q: "Are PURCURE wipes safe for sensitive skin?",
-    a: "Yes — they are alcohol-free, paraben-free, pH balanced and infused with Vitamin E, making them gentle enough for daily and sensitive-skin use.",
+    q: "What makes Purcure Wet Wipes different?",
+    a: "Purcure Wet Wipes are designed for convenience, freshness, and everyday use, with individually wrapped options that are easy to carry wherever you go.",
   },
   {
-    q: "Are PURCURE wipes flushable?",
-    a: "Our current personal cleansing wipes are not flushable — please dispose of them in the bin. A flushable variant is launching soon.",
+    q: "Are your wipes individually wrapped?",
+    a: "Yes. Selected Purcure products are individually wrapped to help maintain freshness and provide on-the-go convenience.",
   },
   {
-    q: "Where are PURCURE wipes manufactured?",
-    a: "PURCURE is proudly headquartered in Ahmedabad, India and produced under strict quality and hygiene standards.",
+    q: "Are Purcure Wet Wipes suitable for everyday use?",
+    a: "Our wipes are designed for daily cleansing and freshening up, whether you're at home, work, traveling, or on the move.",
   },
   {
-    q: "Can I use them on my face?",
-    a: "Yes. The fragrance-free formula is gentle enough for face, hands and body — perfect for travel and on-the-go freshness.",
+    q: "How can I contact your team?",
+    a: "You can reach us through our contact page or email us at info@purcure.com",
   },
   {
     q: "Do you offer bulk or wholesale orders?",
@@ -106,7 +106,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 mt-8 flex flex-wrap justify-center gap-3">
           <Link
             to="/about"
-            className="inline-flex items-center justify-center rounded-full border border-border bg-background px-7 py-3.5 text-base font-semibold hover:bg-secondary transition"
+            className="inline-flex items-center justify-center rounded-full border border-border bg-background px-7 py-3.5 text-base font-semibold hover:bg-accent transition"
           >
             Learn More
           </Link>
@@ -119,7 +119,7 @@ function HomePage() {
           className="absolute inset-0 -z-10"
           style={{
             background:
-              "linear-gradient(180deg, oklch(0.98 0.02 200 / 0.85), oklch(0.96 0.04 180 / 0.7))",
+              "linear-gradient(180deg, oklch(1 0 0 / 0.9), oklch(0.97 0.035 190 / 0.78))",
           }}
         />
 
@@ -145,9 +145,9 @@ function HomePage() {
                   className="absolute inset-0 rounded-full border-2 border-white/70 shadow-soft"
                   style={{
                     background:
-                      "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.9), rgba(190,230,235,0.45) 55%, rgba(120,180,200,0.25))",
+                      "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.95), oklch(0.92 0.08 170 / 0.42) 55%, oklch(0.31 0.09 232 / 0.16))",
                     boxShadow:
-                      "inset 0 0 25px rgba(255,255,255,0.65), 0 8px 20px -8px rgba(20,60,90,0.25)",
+                      "inset 0 0 25px rgba(255,255,255,0.7), 0 8px 20px -8px oklch(0.31 0.09 232 / 0.25)",
                   }}
                 />
                 <div className="absolute top-3 left-4 h-3 w-3 rounded-full bg-white/80 blur-[1px]" />
@@ -270,7 +270,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
       >
         <span className="font-display font-semibold">{q}</span>
-        <span className="h-8 w-8 grid place-items-center rounded-full bg-secondary text-primary shrink-0">
+        <span className="h-8 w-8 grid place-items-center rounded-full bg-accent text-primary shrink-0">
           {open ? <Minus size={16} /> : <Plus size={16} />}
         </span>
       </button>
