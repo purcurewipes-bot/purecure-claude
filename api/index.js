@@ -4,6 +4,6 @@ export const config = {
 
 import handler from "../dist/server/server.js";
 
-export default function (request: Request) {
+export default function (request) {
   return handler.fetch(request, process.env, {});
 }
