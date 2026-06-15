@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import banner from "@/assets/purcure-banner.png";
-import whyPurcure from "@/assets/why-purcure.png.asset.json";
 import carLifestyle from "@/assets/fragrance-free-car.png";
 import { useState } from "react";
 import {
