@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { brand } from "@/config/brand";
-import logo from "@/assets/purcure-logo.png.asset.json";
+import logo from "@/assets/PURCURE-logo.png";
 import { Menu, X } from "lucide-react";
 
 export function Header() {
@@ -24,7 +24,7 @@ export function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-2 group">
           <img
-            src={logo.url}
+            src={logo}
             alt={brand.name}
             className="h-10 w-auto object-contain"
           />

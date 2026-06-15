@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import banner from "@/assets/purcure-banner.png.asset.json";
+import banner from "@/assets/purcure-banner.png";
 import whyPurcure from "@/assets/why-purcure.png.asset.json";
-import carLifestyle from "@/assets/fragrance-free-car.png.asset.json";
+import carLifestyle from "@/assets/fragrance-free-car.png";
 import { useState } from "react";
 import {
   SprayCan,
@@ -100,7 +100,7 @@ function HomePage() {
       {/* FULL-WIDTH HERO BANNER */}
       <section className="relative w-full">
         <img
-          src={banner.url}
+          src={banner}
           alt="PURCURE — Freshness for Every Moment. Premium wet wipes for your everyday needs."
           className="w-full h-auto block"
         />
@@ -182,7 +182,7 @@ function HomePage() {
       <section className="mx-auto max-w-7xl px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
         <div className="relative rounded-3xl overflow-hidden shadow-soft aspect-[4/3]">
           <img
-            src={carLifestyle.url}
+            src={carLifestyle}
             alt="PURCURE in everyday life"
             className="absolute inset-0 h-full w-full object-cover"
           />

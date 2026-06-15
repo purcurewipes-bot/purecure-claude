@@ -4,8 +4,8 @@ import sachetImg from "@/assets/product-sachet-front.png";
 import sachetLying from "@/assets/product-sachet.png";
 import boxBack from "@/assets/product-box-back.png";
 import displayImg from "@/assets/product-display.jpg";
-import fragrancePack from "@/assets/fragrance-free-pack.png.asset.json";
-import fragranceLifestyle from "@/assets/fragrance-free-lifestyle.png.asset.json";
+import fragrancePack from "@/assets/fragrance-free-pack.png";
+import fragranceLifestyle from "@/assets/fragrance-free-lifestyle.png";
 import {
   Briefcase,
   Dumbbell,
@@ -46,7 +46,7 @@ const variants = [
     scent: "Fragrance Free",
     size: "25 large wipes · resealable",
     desc: "Alcohol-free, paraben-free, pH balanced and infused with Vitamin E — gentle daily care for sensitive skin.",
-    img: fragrancePack.url,
+    img: fragrancePack,
   },
 ];
 
@@ -83,7 +83,7 @@ function ProductsPage() {
         <div className="relative h-[400px] lg:h-[520px] flex items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/15 to-transparent rounded-[3rem] blur-3xl" />
           <img
-            src={fragranceLifestyle.url}
+            src={fragranceLifestyle}
             alt="PURCURE fragrance-free wipes"
             className="relative max-h-full w-auto object-contain drop-shadow-2xl rounded-3xl"
           />

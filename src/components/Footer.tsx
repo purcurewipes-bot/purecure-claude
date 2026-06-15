@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { brand } from "@/config/brand";
 import { Instagram, Twitter, Facebook, Mail, Phone, MapPin, MessageCircle, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
-import logo from "@/assets/purcure-logo.png.asset.json";
+import logo from "@/assets/PURCURE-logo.png";
 import { submitWeb3Form } from "@/lib/web3forms";
 import { toast } from "sonner";
 
@@ -35,7 +35,7 @@ export function Footer() {
         {/* Brand */}
         <div className="lg:col-span-2">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logo.url} alt={brand.name} className="h-10 w-auto object-contain" />
+            <img src={logo} alt={brand.name} className="h-10 w-auto object-contain" />
           </Link>
           <p className="mt-3 text-sm text-muted-foreground max-w-sm">
             {brand.tagline} — Premium hygiene wipes designed for real, everyday moments.
