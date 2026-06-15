@@ -117,14 +117,6 @@ function HomePage() {
       {/* WHY CHOOSE PURCURE — bubble grid */}
       <section className="relative mt-24 py-20 overflow-hidden">
         <div
-          className="absolute inset-0 -z-10 opacity-[0.18]"
-          style={{
-            backgroundImage: `url(${whyPurcure.url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <div
           className="absolute inset-0 -z-10"
           style={{
             background:
