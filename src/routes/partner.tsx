@@ -12,9 +12,19 @@ import {
   Globe,
   Headphones,
   Mail,
+  ChevronDown,
 } from "lucide-react";
 import { brand } from "@/config/brand";
 import { countriesData } from "@/config/countries";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 
 export const Route = createFileRoute("/partner")({
   head: () => ({
@@ -56,6 +66,7 @@ const benefits = [
 ];
 
 function PartnerPage() {
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     full_name: "",
@@ -77,6 +88,10 @@ function PartnerPage() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.country_code) {
+      toast.error("Please select a country code");
+      return;
+    }
     setLoading(true);
     const res = await submitWeb3Form(form, "New PURCURE Partnership Inquiry");
     if (res.ok) {
@@ -184,23 +199,53 @@ function PartnerPage() {
               </Field>
             </div>
 
-            <div className="mt-5 grid sm:grid-cols-2 gap-5">
+            <div className="mt-5">
               <Field label="Phone Number" required>
                 <div className="flex gap-2">
-                  <select
-                    required
-                    value={form.country_code}
-                    onChange={update("country_code")}
-                    className="input w-[120px] shrink-0"
-                    style={{ minWidth: "120px" }}
-                  >
-                    <option value="" disabled>Code</option>
-                    {countriesData.map((c) => (
-                      <option key={`${c.iso}-${c.code}`} value={c.code}>
-                        {c.code} ({c.iso})
-                      </option>
-                    ))}
-                  </select>
+                  <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild>
+                      <button
+                        type="button"
+                        role="combobox"
+                        aria-expanded={open}
+                        className="input shrink-0 flex items-center justify-between text-left cursor-pointer"
+                        style={{ width: "130px" }}
+                      >
+                        <span className="truncate">
+                          {form.country_code || "Code"}
+                        </span>
+                        <ChevronDown className="h-4 w-4 opacity-50 shrink-0 ml-1" />
+                      </button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[300px] p-0" align="start">
+                      <Command>
+                        <CommandInput placeholder="Search country or code..." />
+                        <CommandList>
+                          <CommandEmpty>No country found.</CommandEmpty>
+                          <CommandGroup className="max-h-[220px] overflow-y-auto">
+                            {countriesData.map((c) => (
+                              <CommandItem
+                                key={`${c.iso}-${c.code}`}
+                                value={`${c.name} ${c.code} ${c.iso}`}
+                                onSelect={() => {
+                                  setForm((f) => ({ ...f, country_code: c.code }));
+                                  setOpen(false);
+                                }}
+                                className="flex items-center justify-between cursor-pointer"
+                              >
+                                <span>
+                                  {c.name} ({c.code})
+                                </span>
+                                <span className="text-xs text-muted-foreground font-semibold">
+                                  {c.iso}
+                                </span>
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                   <input
                     required
                     type="tel"
@@ -209,9 +254,13 @@ function PartnerPage() {
                     value={form.phone}
                     onChange={update("phone")}
                     className="input flex-1"
+                    style={{ minWidth: 0 }}
                   />
                 </div>
               </Field>
+            </div>
+
+            <div className="mt-5 grid sm:grid-cols-2 gap-5">
               <Field label="Country" required>
                 <select
                   required
@@ -223,9 +272,6 @@ function PartnerPage() {
                   {countries.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               </Field>
-            </div>
-
-            <div className="mt-5">
               <Field label="Business Type" required>
                 <select
                   required
