@@ -14,6 +14,7 @@ import {
   Mail,
 } from "lucide-react";
 import { brand } from "@/config/brand";
+import { countriesData } from "@/config/countries";
 
 export const Route = createFileRoute("/partner")({
   head: () => ({
@@ -44,18 +45,7 @@ const businessTypes = [
   "Other",
 ];
 
-const countries = [
-  "United States",
-  "Canada",
-  "United Kingdom",
-  "United Arab Emirates",
-  "India",
-  "Saudi Arabia",
-  "Australia",
-  "Germany",
-  "France",
-  "Other",
-];
+const countries = countriesData.map((c) => c.name);
 
 const benefits = [
   { icon: ShieldCheck, title: "Premium Quality", subtitle: "Products" },
@@ -71,6 +61,7 @@ function PartnerPage() {
     full_name: "",
     company_name: "",
     email: "",
+    country_code: "",
     phone: "",
     country: "",
     business_type: "",
@@ -94,6 +85,7 @@ function PartnerPage() {
         full_name: "",
         company_name: "",
         email: "",
+        country_code: "",
         phone: "",
         country: "",
         business_type: "",
@@ -194,15 +186,31 @@ function PartnerPage() {
 
             <div className="mt-5 grid sm:grid-cols-2 gap-5">
               <Field label="Phone Number" required>
-                <input
-                  required
-                  type="tel"
-                  maxLength={40}
-                  placeholder="Enter your phone number"
-                  value={form.phone}
-                  onChange={update("phone")}
-                  className="input"
-                />
+                <div className="flex gap-2">
+                  <select
+                    required
+                    value={form.country_code}
+                    onChange={update("country_code")}
+                    className="input w-[120px] shrink-0"
+                    style={{ minWidth: "120px" }}
+                  >
+                    <option value="" disabled>Code</option>
+                    {countriesData.map((c) => (
+                      <option key={`${c.iso}-${c.code}`} value={c.code}>
+                        {c.code} ({c.iso})
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    required
+                    type="tel"
+                    maxLength={40}
+                    placeholder="Enter your phone number"
+                    value={form.phone}
+                    onChange={update("phone")}
+                    className="input flex-1"
+                  />
+                </div>
               </Field>
               <Field label="Country" required>
                 <select

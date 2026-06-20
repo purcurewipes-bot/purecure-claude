@@ -1,11 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import sachetImg from "@/assets/product-sachet-front.png";
 import sachetLying from "@/assets/product-sachet.png";
 import boxBack from "@/assets/product-box-back.png";
+import boxFront from "@/assets/product-box-front.png";
 import displayImg from "@/assets/product-display.jpg";
 import fragrancePack from "@/assets/fragrance-free-pack.png";
 import fragranceLifestyle from "@/assets/fragrance-free-lifestyle.png";
+import fragranceCar from "@/assets/fragrance-free-car.png";
 import {
   Briefcase,
   Dumbbell,
@@ -15,6 +17,12 @@ import {
   Loader2,
   Sun,
   HeartPulse,
+  ChevronLeft,
+  ChevronRight,
+  Waves,
+  Baby,
+  Bath,
+  Leaf,
 } from "lucide-react";
 import { toast } from "sonner";
 import { submitWeb3Form } from "@/lib/web3forms";
@@ -33,28 +41,48 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-const variants = [
-  {
-    name: "Aloe-Cucumber Individually Wrapped Wipes",
-    scent: "Aloe & Cucumber",
-    size: "25 Ct. · individually wrapped",
-    desc: "Hygienically sealed single-wipe sachets — the perfect travel and on-the-go companion.",
-    img: displayImg,
-  },
+const flagshipProducts = [
   {
     name: "Fragrance-Free Personal Cleansing Wipes",
     scent: "Fragrance Free",
     size: "25 large wipes · resealable",
     desc: "Alcohol-free, paraben-free, pH balanced and infused with Vitamin E — gentle daily care for sensitive skin.",
-    img: fragrancePack,
+    images: [fragrancePack, fragranceLifestyle, fragranceCar],
+  },
+  {
+    name: "Aloe-Cucumber Individually Wrapped Wipes",
+    scent: "Aloe & Cucumber",
+    size: "25 Ct. · individually wrapped",
+    desc: "Hygienically sealed single-wipe sachets — the perfect travel and on-the-go companion.",
+    images: [boxFront, boxBack, displayImg, sachetLying, sachetImg],
   },
 ];
 
 const upcoming = [
-  { name: "Flushable Wipes", desc: "Septic & sewer safe everyday wipes.", img: sachetImg },
-  { name: "Baby Wipes", desc: "Ultra-gentle for delicate baby skin.", img: sachetLying },
-  { name: "Bath & Body Wipes", desc: "Full-body refresh, anywhere, anytime.", img: displayImg },
-  { name: "Facial Bamboo Tissue", desc: "Soft, sustainable bamboo facial tissue.", img: boxBack },
+  { 
+    name: "Flushable Wipes", 
+    desc: "Septic & sewer safe everyday wipes.", 
+    icon: Waves, 
+    color: "from-blue-500/10 to-teal-500/10 text-blue-600" 
+  },
+  { 
+    name: "Baby Wipes", 
+    desc: "Ultra-gentle for delicate baby skin.", 
+    icon: Baby, 
+    color: "from-pink-500/10 to-rose-500/10 text-pink-600" 
+  },
+  { 
+    name: "Bath & Body Wipes", 
+    desc: "Full-body refresh, anywhere, anytime.", 
+    icon: Bath, 
+    color: "from-purple-500/10 to-indigo-500/10 text-purple-600" 
+  },
+  { 
+    name: "Facial Bamboo Tissue", 
+    desc: "Soft, sustainable bamboo facial tissue.", 
+    icon: Leaf, 
+    color: "from-green-500/10 to-emerald-500/10 text-green-600" 
+  },
 ];
 
 const scenarios = [
@@ -66,20 +94,99 @@ const scenarios = [
   { icon: HeartPulse, title: "Personal Hygiene", desc: "Gentle, dependable care anytime you need it." },
 ];
 
+function ImageSlider({ images, name }: { images: string[]; name: string }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [index, images.length]);
+
+  const prev = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+  };
+
+  const next = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
+  };
+
+  return (
+    <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-accent to-background p-8 flex items-center justify-center select-none overflow-hidden group">
+      {/* Images container */}
+      <div className="relative w-full h-full flex items-center justify-center">
+        {images.map((img, i) => (
+          <img
+            key={img}
+            src={img}
+            alt={`${name} view ${i + 1}`}
+            className={`absolute max-h-full w-auto object-contain transition-all duration-500 ease-in-out ${
+              i === index 
+                ? "opacity-100 scale-100 pointer-events-auto" 
+                : "opacity-0 scale-95 pointer-events-none"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Navigation Arrows */}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur border border-border shadow-sm flex items-center justify-center text-foreground hover:bg-background hover:scale-105 active:scale-95 opacity-0 group-hover:opacity-100 transition-all duration-300"
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur border border-border shadow-sm flex items-center justify-center text-foreground hover:bg-background hover:scale-105 active:scale-95 opacity-0 group-hover:opacity-100 transition-all duration-300"
+            aria-label="Next image"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </>
+      )}
+
+      {/* Slide indicators (dots) */}
+      {images.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={(e) => {
+                e.preventDefault();
+                setIndex(i);
+              }}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === index ? "w-5 bg-primary" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ProductsPage() {
   return (
     <>
       {/* HERO */}
-      <section className="mx-auto max-w-7xl px-6 pt-12 pb-16 lg:pt-20 grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <span className="text-sm font-medium text-primary">Our Products</span>
-          <h1 className="mt-3 font-display text-5xl md:text-6xl font-bold leading-[1.05]">
-            Wipes designed for <span className="text-gradient">every moment.</span>
-          </h1>
-          <p className="mt-5 text-lg text-muted-foreground max-w-lg">
-            Premium personal cleansing wipes — built for travel, the gym, the office and every part of daily life.
-          </p>
-        </div>
+      <section className="mx-auto max-w-4xl px-6 pt-16 pb-20 text-center flex flex-col items-center">
+        <span className="text-sm font-semibold tracking-widest uppercase text-primary">Our Products</span>
+        <h1 className="mt-4 font-display text-5xl md:text-6xl font-bold leading-[1.1] text-foreground">
+          Wipes designed for <span className="text-gradient">every moment.</span>
+        </h1>
+        <p className="mt-6 text-xl text-muted-foreground max-w-2xl leading-relaxed">
+          Premium personal cleansing wipes — built for travel, the gym, the office, and every part of daily life.
+        </p>
       </section>
 
       {/* FLAGSHIP PRODUCTS */}
@@ -89,19 +196,12 @@ function ProductsPage() {
           <h2 className="mt-3 font-display text-4xl md:text-5xl font-bold">Our current bestsellers</h2>
         </div>
         <div className="mt-12 grid gap-8 md:grid-cols-2">
-          {variants.map((v) => (
+          {flagshipProducts.map((v) => (
             <article
               key={v.name}
-              className="group rounded-3xl border border-border bg-card overflow-hidden shadow-card hover:shadow-soft hover:-translate-y-1 transition"
+              className="group rounded-3xl border border-border bg-card overflow-hidden shadow-card hover:shadow-soft hover:-translate-y-1 transition duration-300"
             >
-              <div className="aspect-[4/3] bg-gradient-to-br from-accent to-background grid place-items-center p-8">
-                <img
-                  src={v.img}
-                  alt={v.name}
-                  loading="lazy"
-                  className="max-h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+              <ImageSlider images={v.images} name={v.name} />
               <div className="p-7">
                 <span className="text-xs font-semibold tracking-widest uppercase text-primary">{v.scent}</span>
                 <h3 className="mt-2 font-display text-2xl font-bold">{v.name}</h3>
@@ -124,17 +224,20 @@ function ProductsPage() {
           {upcoming.map((u) => (
             <article
               key={u.name}
-              className="relative rounded-3xl border border-border bg-card overflow-hidden shadow-card"
+              className="group relative rounded-3xl border border-border bg-card p-8 flex flex-col justify-between shadow-card hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden min-h-[220px]"
             >
-              <span className="absolute top-3 right-3 z-10 rounded-full bg-foreground/85 text-background text-[10px] font-bold tracking-widest uppercase px-3 py-1">
-                Coming Soon
-              </span>
-              <div className="aspect-square bg-gradient-to-br from-accent to-background grid place-items-center p-6 grayscale opacity-70">
-                <img src={u.img} alt={u.name} loading="lazy" className="w-full h-full object-contain" />
+              <div className={`absolute -right-8 -top-8 w-24 h-24 rounded-full bg-gradient-to-br ${u.color} opacity-20 blur-xl group-hover:opacity-40 transition-opacity`} />
+              <div>
+                <div className={`h-12 w-12 grid place-items-center rounded-2xl bg-gradient-to-br ${u.color} shrink-0`}>
+                  <u.icon size={24} />
+                </div>
+                <h3 className="mt-6 font-display text-xl font-bold text-foreground">{u.name}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{u.desc}</p>
               </div>
-              <div className="p-5">
-                <h3 className="font-display text-lg font-semibold">{u.name}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{u.desc}</p>
+              <div className="mt-6 flex items-center justify-between">
+                <span className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground/80 bg-accent px-2.5 py-1 rounded-full">
+                  Coming Soon
+                </span>
               </div>
             </article>
           ))}

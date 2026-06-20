@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import banner from "@/assets/purcure-banner.png";
 import carLifestyle from "@/assets/fragrance-free-car1.jpg";
+import faceBodyLifestyle from "@/assets/face-body-lifestyle.png";
 import { useState } from "react";
 import {
   SprayCan,
@@ -66,7 +67,7 @@ const lifestyle = [
     icon: Heart,
     title: "Face & Body",
     desc: "Gentle, on-the-go personal care for everyday confidence.",
-    img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=80",
+    img: faceBodyLifestyle,
   },
 ];
 

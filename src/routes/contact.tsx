@@ -56,7 +56,16 @@ function ContactPage() {
         <aside className="space-y-4">
           {[
             { icon: Mail, label: "Email", value: brand.email },
-            { icon: Phone, label: "Phone", value: brand.phone },
+            {
+              icon: Phone,
+              label: "Phone",
+              value: (
+                <div className="space-y-1">
+                  <div>India: {brand.phoneIndia}</div>
+                  <div>USA: {brand.phoneIntl}</div>
+                </div>
+              ),
+            },
             { icon: MapPin, label: "Location", value: brand.location },
           ].map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex items-start gap-4 rounded-3xl border border-border bg-card p-6 shadow-card">
@@ -65,7 +74,7 @@ function ContactPage() {
               </div>
               <div>
                 <div className="text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
-                <div className="mt-0.5 font-medium">{value}</div>
+                <div className="mt-0.5 font-medium text-foreground">{value}</div>
               </div>
             </div>
           ))}
